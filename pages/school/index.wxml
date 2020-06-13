@@ -1,0 +1,7 @@
+<!--pages/school/index.wxml-->
+<image class='background' src="http://a1.qpic.cn/psc?/V10jt8jl0iyQHV/UGewEcUieSobjMeKhf9dIEaCZNnkre64pxHsab0HNC9k1Zno2ud7ombgmtJ92zQ38B7hHRUFxKBrjCbtt.i9nQ!!/b&ek=1&kp=1&pt=0&bo=OAQkCQAAAAARFzE!&tl=3&vuin=1392365840&tm=1592042400&sce=60-2-2&rf=viewer_4" mode="aspectFill"></image>
+<view class="container">
+  <van-grid square column-num="2"  clickable="true" gutter="{{ 10 }}" style="width:100%;margin-top:10px;">
+    <van-grid-item style="" wx:key="{{item.name}}" wx:for="{{modules}}" link-type="navigateTo" url="{{item.url}}" icon="{{item.icon}}" text="{{item.name}}" />
+  </van-grid>
+</view>

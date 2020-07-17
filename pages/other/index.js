@@ -1,5 +1,4 @@
 
-// import { cloud as CF } from '../../utils/cloudFunction.js'
 Page({
 
   /**

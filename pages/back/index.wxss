@@ -1,5 +1,4 @@
 /* pages/back/index.wxss */
-/* components/weForm/weForm.wxss */
 page{
   height:100%;
 }

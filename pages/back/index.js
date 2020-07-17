@@ -1,11 +1,8 @@
-// pages/databaseGuide/databaseGuide.js
-
 const app = getApp()
 
 Page({
 
   data: {
-    show: false,
     formData: {
       qs: [{
           name: '姓名',
@@ -14,9 +11,15 @@ Page({
           value: ''
         },
         {
-          name: '工作地点',
+          name: '学号',
           type: 'text',
-          placeholder: '请输入工作地点',
+          placeholder: '请输入学号',
+          value: ''
+        },
+        {
+          name: '家庭住址',
+          type: 'text',
+          placeholder: '请输入家庭住址',
           value: ''
         },
         {
@@ -35,7 +38,7 @@ Page({
           value: ''
         },
         {
-          name: '目前是否在工作地/校内',
+          name: '目前是否在校内',
           type: 'radio',
           items: [{
               name: '是',
@@ -55,15 +58,15 @@ Page({
           value: ''
         },
         {
-          name: '返程时间',
+          name: '何时返程',
           type: 'text',
-          placeholder: '请输入返程时间',
+          placeholder: '请输入返程的时间',
           value: ''
         },
         {
-          name: '返程地点',
+          name: '返程所乘交通工具',
           type: 'text',
-          placeholder: '请输入返程地点',
+          placeholder: '请输入交通工具',
           value: ''
         },
         {
@@ -148,133 +151,124 @@ Page({
       ]
     }
   },
-  formatDate(date) {
-    return `${date.getMonth() + 1}/${date.getDate()}`;
-  },
-  onclick(date){
-    this .show =true
-  },
-  onConfirm(date) {
-    this.show = false;
-    this.date = this.formatDate(date);
-  },
-  
-  // onLoad: function(options) {
-  //   if (app.globalData.openid) {
-  //     this.setData({
-  //       openid: app.globalData.openid
-  //     })
-  //   }
 
-  //   var date = new Date();
-  //   var Y = date.getFullYear() + '-';
-  //   var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-  //   var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
-  //   var date = date.getDate();
-  //   console.log("当前时间：" + Y + M + D);
-  //   this.setData({
-  //     date: Y + M + D
-  //   })
-  // },
+  onLoad: function(options) {
+    if (app.globalData.openid) {
+      this.setData({
+        openid: app.globalData.openid
+      })
+    }
+
+    var date = new Date();
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
+    var date = date.getDate();
+    console.log("当前时间：" + Y + M + D);
+    this.setData({
+      date: Y + M + D
+    })
+  },
 
   //输入信息验证，敏感字符检测
-  // onAdd: async function(e) {
-  //   const data = e.detail;
-  //   let text = '';
+  onAdd: async function(e) {
+    const data = e.detail;
+    let text = '';
 
-  //   if (data[0].value === '') {
-  //     wx.showToast({
-  //       icon: 'none',
-  //       title: '姓名不能为空'
-  //     });
-  //     return;
-  //   }
+    if (data[0].value === '') {
+      wx.showToast({
+        icon: 'none',
+        title: '姓名不能为空'
+      });
+      return;
+    }
 
-  //   data.forEach(item => {
-  //     text += item.value;
-  //   })
+    data.forEach(item => {
+      text += item.value;
+    })
 
-  //   console.log("敏感字符检测内容：" + text)
-  //   //敏感字符检测
-  //   wx.cloud.init();
-  //   const res = await wx.cloud.callFunction({
-  //     name: 'msg_sec_check',
-  //     data: {
-  //       text: text
-  //     }
-  //   })
-  //   console.log("敏感信息检测结果：" + res.result.code);
-  //   if (res.result.code == "200") {
-  //     //检测通过
-  //     this.onAddSec(data)
-  //   } else {
-  //     //执行不通过
-  //     wx.showToast({
-  //       title: '输入内容包含敏感信息,请重新输入',
-  //       icon: 'none',
-  //       duration: 3000
-  //     })
-  //   }
-  // },
+    console.log("敏感字符检测内容：" + text)
+    //敏感字符检测
+    wx.cloud.init();
+    const res = await wx.cloud.callFunction({
+      name: 'msg_sec_check',
+      data: {
+        text: text
+      }
+    })
+    console.log("敏感信息检测结果：" + res.result.code);
+    if (res.result.code == "200") {
+      //检测通过
+      this.onAddSec(data)
+    } else {
+      //执行不通过
+      wx.showToast({
+        title: '输入内容包含敏感信息,请重新输入',
+        icon: 'none',
+        duration: 3000
+      })
+    }
+  },
 
-  // //返程信息提交
-  // onAddSec: function(formData) {
-  //   wx.showLoading({
-  //     title: '信息提交中',
-  //   })
-  //   const db = wx.cloud.database()
-  //   const data = {
-  //     name: formData[0].value,
-  //     place: formData[1].value,
-  //     date: formData[5].value,
-  //     traffic: formData[7].value,
-  //     trainnumber: formData[8].value,
-  //     bodystatusinfo: formData[12].value,
-  //     otherManBodyInfo: formData[13].value,
-  //     wentprovinces: formData[4].value,
-  //     gobackwhere: formData[5].value,
-  //     goHBFlag: formData[2].value,
-  //     workPlaceFlag: formData[3].value,
-  //     withIllTakeFlag: formData[9].value,
-  //     contractillFlag: formData[10].value,
-  //     bodyStatusFlag: formData[11].value,
-  //     goHareasHaveFlagBFlag: formData[14].value,
-  //     remark: formData[15].value
-  //   }
+  //返程信息提交
+  onAddSec: function(formData) {
+    wx.showLoading({
+      title: '信息提交中',
+    })
+    const db = wx.cloud.database("Back")
+    const data = {
+      name: formData[0].value,
+      number: formData[1].value,
+      place: formData[2].value,
+      goHBFlag:formData[3].value,
+      workPlaceFlag: formData[4].value,
+      wentplace: formData[5].value,
+      data:formData[6].value,
+      traffic: formData[7].value,
+      trainnumber: formData[8].value,
+      withIllTakeFlag: formData[9].value,
+      contractillFlag: formData[10].value,
+      bodyStatusFlag: formData[11].value,
+      bodystatusinfo: formData[12].value,
+      otherManBodyInfo: formData[13].value,
+      goHareasHaveFlagBFlag: formData[14].value,
+      remark: formData[15].value
+    }
 
-  //   db.collection('GOBACKINFO').add({
-  //     data,
-  //     success: res => {
-  //       wx.hideLoading()
-  //       console.log('返程信息登记成功，记录 _id: ', res._id)
-  //       wx.reLaunch({
-  //         url: '../msg/msg_success',
-  //       })
-  //       console.log('返程信息登记成功，记录 _id: ', res._id)
-  //     },
-  //     fail: err => {
-  //       wx.hideLoading()
-  //       console.error('返程信息登记失败：', err)
-  //       wx.reLaunch({
-  //         url: '../msg/msg_fail',
-  //       })
-  //     }
-  //   })
-  // },
+    db.collection('GOBACKINFO').add({
+      data,
+      success: res => {
+        wx.hideLoading()
+        console.log('返程信息登记成功，记录 _id: ', res._id)
+        wx.reLaunch({
+          url: '../msg/msg_success',
+        })
+        console.log('返程信息登记成功，记录 _id: ', res._id)
+      },
+      fail: err => {
+        wx.hideLoading()
+        console.error('返程信息登记失败：', err)
+        wx.reLaunch({
+          url: '../msg/msg_fail',
+        })
+      }
+    })
+  },
 
 
-  // goHome: function() {
-  //   const pages = getCurrentPages()
-  //   if (pages.length === 2) {
-  //     wx.navigateBack()
-  //   } else if (pages.length === 1) {
-  //     wx.redirectTo({
-  //       url: '../index/index',
-  //     })
-  //   } else {
-  //     wx.reLaunch({
-  //       url: '../index/index',
-  //     })
-  //   }
-  // }
+  goHome: function() {
+    const pages = getCurrentPages()
+    if (pages.length === 2) {
+      wx.navigateBack()
+    } else if (pages.length === 1) {
+      wx.redirectTo({
+        url: '../index/index',
+      })
+    } else {
+      wx.reLaunch({
+        url: '../index/index',
+      })
+    }
+  }
+
 })

@@ -1,5 +1,5 @@
 <!--pages/other/index.wxml-->
-	<image class='background' src="http://m.qpic.cn/psc?/V10jt8jl0iyQHV/cXP39dXjFtymXNK2lOGni.07V.XtHZ6pqxvl*pJ9gkQ8kBbW7MeXNg4rwaejdOFYGvYke3icxNSr1xF4qv3XtI6WNe52kza1G5*Swvr*IjY!/b&bo=OAQkCQAAAAADh7M!&rf=viewer_4" mode="aspectFill"></image>
+	<image class='background' src="cloud://db1-68zr1.6462-db1-68zr1-1302432248/background/背景14.JPG" mode="aspectFill"></image>
 <view class="container">
   <van-grid column-num="2" square="{{true}}" clickable="true" gutter="{{ 10 }}" style="width:100%;margin-top:10px;" >
   <van-grid-item style="" icon="/image/add.png">

@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "van-image":"/miniprogram_npm/@vant/weapp/image"
+    "van-image":"//miniprogram_npm/@vant/weapp/image/index"
   },
     "navigationBarTitleText": "我的认证"
 

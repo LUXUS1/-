@@ -6,12 +6,12 @@ Page({
    */
   data: {
     modules: [{
-        url: "/pages/peopleInfo/peopleInfo",
+        url: "/pages/peopleInfo/index",
       name: "信息修改",
       icon: "/image/fieldapplication.png"
     }, {
-      url: "/pages/placeHistory/placeHistory",
-      name: "出入记录",
+      url: "/pages/placeHistory/index",
+      name: "信息记录",
       icon: "/image/measuredvalue.png"
     }],
   },

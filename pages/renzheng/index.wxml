@@ -1,5 +1,5 @@
 <!--pages/renzheng/index.wxml-->
-<image class='background' src="http://m.qpic.cn/psc?/V10jt8jl0iyQHV/cXP39dXjFtymXNK2lOGnizteh42rsN3*0XQf3qtjva2uXdCGh1mUzSu8k75*I77vETpaoDMzTbevz6B8a3Hog32N33f2FPRV4Cu5oopJoVY!/b&bo=OAQlCQAAAAADl6I!&rf=viewer_4" mode="aspectFill"></image>
+<image class='background' src="cloud://db1-68zr1.6462-db1-68zr1-1302432248/background/背景16.JPG" mode="aspectFill"></image>
 
 <view class="container">
 
@@ -9,28 +9,34 @@
   height="5rem"
   src="/image/logo.jpg"
 />
-<van-form  class="vanfrom" submit="onSubmit">
-  <van-field class="myno"
-    v-model="username"
-    name="学号"
-    label="学号"
-    placeholder="请输入学号"
-    :rules="[{ required: true, message: '请填写学号' }]"
-  />
-  <van-field class="mypwd"
-    v-model="password"
-    type="password"
-    name="密码"
-    label="密码"
-    placeholder="请输入密码"
-    :rules="[{ required: true, message: '请填写密码' }]"
-  />
-  <div style="margin: 16px;">
-    <van-button round block type="default" native-type="submit">
-     保存
-    </van-button>
-  </div>
-</van-form>
+<van-cell-group class="list">
+        <van-field
+          v-model="username"
+          clearable
+          label="学号"
+          right-icon="question-o"
+          placeholder="请输入学号"
+          left-icon="/image/name.png"
+          click-right-icon="$toast('学号必须为数字')"
+        />
+        
+        <van-field
+          v-model="password"
+          clearable
+          type="password"
+          label="密码"
+          right-icon="question-o"
+          placeholder="请输入密码"
+          left-icon="/image/feiji.png"
+          click-right-icon="$toast('密码必须是数字、字母、下划线')"
+        />
+      </van-cell-group>
+      <!--登录按钮-->
+        <div class="pd15">
+        <van-button round type="default"
+         url="pages/index/index" size="large" click="onClickButtonSubmit">
+        登录</van-button>
+        </div>
 
 </view>
 
